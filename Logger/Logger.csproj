@@ -46,15 +46,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\ILoggerConfiguration.cs" />
+    <Compile Include="Infrastructure\IScheduler.cs" />
     <Compile Include="Infrastructure\LoggerConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedules\DailySchedule.cs" />
+    <Compile Include="Schedules\InstantSchedule.cs" />
+    <Compile Include="Schedules\ScheduleHelper.cs" />
+    <Compile Include="Schedules\ScheduleValidator.cs" />
+    <Compile Include="Schedules\WeeklySchedule.cs" />
     <Compile Include="Service.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Service.Designer.cs">
       <DependentUpon>Service.cs</DependentUpon>
     </Compile>
+    <Compile Include="Types\AlertFrequencies.cs" />
     <Compile Include="Types\ReleaseModes.cs" />
   </ItemGroup>
   <ItemGroup>
