@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceProcess;
 
 namespace Logger
 {
@@ -6,8 +7,12 @@ namespace Logger
     {
         static void Main(string[] args)
         {
-            // to hold console window open whilst testing
-            Console.ReadLine();
+            var service = new Service();
+
+            if (Environment.UserInteractive)
+                service.RunConsole();
+            else
+                 ServiceBase.Run(new ServiceBase[] {service});
 
         }
     }

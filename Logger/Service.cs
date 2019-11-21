@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ServiceProcess;
 
 namespace Logger
 {
@@ -7,6 +8,16 @@ namespace Logger
         public Service()
         {
             InitializeComponent();
+        }
+
+        public void RunConsole()
+        {
+            OnStart(new string[] {});
+
+            Console.WriteLine("Starting, press any key to exit...");
+            Console.ReadKey();
+
+            OnStop();
         }
 
         protected override void OnStart(string[] args)
