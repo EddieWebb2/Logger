@@ -9,11 +9,11 @@ namespace Logger
     {
         static void Main(string[] args)
         {
-            LoggerConfiguration config = new LoggerConfiguration();
+            LoggerConfiguration _config = new LoggerConfiguration();
 
             var service = new Service();
 
-            if (Environment.UserInteractive || config.Mode == ReleaseModes.Dev)
+            if (Environment.UserInteractive || _config.Mode == ReleaseModes.Dev)
                 service.RunConsole();
             else
                  ServiceBase.Run(new ServiceBase[] {service});
