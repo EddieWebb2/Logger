@@ -6,7 +6,7 @@ namespace Logger.Schedules
 {
     public class InstantSchedule : IScheduler
     {
-        private readonly ScheduleHelper _scheduleHelper;
+        private readonly IScheduleHelper _scheduleHelper;
 
         public AlertFrequencies AlertFrequency => AlertFrequencies.Instant;
 
@@ -29,7 +29,7 @@ namespace Logger.Schedules
             NextRunDate = current;
         }
 
-        public InstantSchedule(ScheduleHelper helper)
+        public InstantSchedule(IScheduleHelper helper)
         {
             _scheduleHelper = helper;
 

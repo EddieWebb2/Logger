@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceProcess;
 using Logger.Infrastructure;
-using Logger.Types;
+using StructureMap;
 
 namespace Logger
 {
@@ -11,13 +11,13 @@ namespace Logger
         {
             LoggerConfiguration _config = new LoggerConfiguration();
 
-            var service = new Service();
+            var container = new Container(new LoggerRegistry(_config));
+            var service = container.GetInstance<Service>();
 
-            if (Environment.UserInteractive || _config.Mode == ReleaseModes.Dev)
+            if (Environment.UserInteractive)
                 service.RunConsole();
             else
                  ServiceBase.Run(new ServiceBase[] {service});
-
         }
     }
 }
