@@ -4,7 +4,7 @@ using Logger.Types;
 
 namespace Logger.Schedules
 {
-    public class ScheduleHelper
+    public class ScheduleHelper: IScheduleHelper
     {
         private readonly ILoggerConfiguration _config;
 

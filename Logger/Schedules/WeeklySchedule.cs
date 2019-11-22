@@ -6,7 +6,7 @@ namespace Logger.Schedules
 {
     public class WeeklySchedule : IScheduler
     {
-        private readonly ScheduleHelper _scheduleHelper;
+        private readonly IScheduleHelper _scheduleHelper;
 
         public AlertFrequencies AlertFrequency => AlertFrequencies.Weekly;
 
@@ -21,7 +21,7 @@ namespace Logger.Schedules
             NextRunDate = current.Date + config.Weekly;
         }
 
-        public WeeklySchedule(ScheduleHelper helper)
+        public WeeklySchedule(IScheduleHelper helper)
         {
             _scheduleHelper = helper;
 
