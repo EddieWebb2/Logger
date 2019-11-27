@@ -1,15 +1,12 @@
-﻿using System;
+using System;
 using Logger.Infrastructure;
-using Logger.Types;
 
 namespace Logger.Schedules
 {
     public class DailySchedule : IScheduler
     {
         private readonly IScheduleHelper _scheduleHelper;
-
-        public AlertFrequencies AlertFrequency => AlertFrequencies.Daily;
-
+        public string ScheduleType { get; }
         public DateTime NextRunDate { get; private set; }
 
         public void SetNextRunDate(ILoggerConfiguration config, DateTime current)
@@ -23,9 +20,7 @@ namespace Logger.Schedules
         public DailySchedule(IScheduleHelper scheduleHelper)
         {
             _scheduleHelper = scheduleHelper;
-
-            var validator = new ScheduleValidator(this);
-            validator.Validate();
+            ScheduleType = "Daily";
         }
     }
 }

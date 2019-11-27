@@ -1,15 +1,12 @@
-﻿using System;
+using System;
 using Logger.Infrastructure;
-using Logger.Types;
 
 namespace Logger.Schedules
 {
     public class InstantSchedule : IScheduler
     {
         private readonly IScheduleHelper _scheduleHelper;
-
-        public AlertFrequencies AlertFrequency => AlertFrequencies.Instant;
-
+        public string ScheduleType { get; }
         public DateTime NextRunDate { get; private set; }
 
         public void SetNextRunDate(ILoggerConfiguration config, DateTime current)
@@ -32,9 +29,7 @@ namespace Logger.Schedules
         public InstantSchedule(IScheduleHelper helper)
         {
             _scheduleHelper = helper;
-
-            var validator = new ScheduleValidator(this);
-            validator.Validate();
+            ScheduleType = "Instant";
         }
     }
 }
