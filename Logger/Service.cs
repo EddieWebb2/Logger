@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
@@ -15,6 +15,7 @@ namespace Logger
         private readonly IScheduleHelper _scheduleHelper;
 
         private bool _stopProcessing;
+        private Thread _thread;
 
         public Service(ILoggerConfiguration config, IScheduleHelper scheduleHelper)
         {
@@ -43,7 +44,7 @@ namespace Logger
 
         public void RunConsole()
         {
-            OnStart(new string[] {});
+            OnStart(new string[] { });
 
             Console.WriteLine("Starting, press any key to exit...");
             Console.ReadKey();
@@ -53,15 +54,37 @@ namespace Logger
 
         protected override void OnStart(string[] args)
         {
+            BeginProcess();
+        }
+
+
+        public bool BeginProcess()
+        {
+            if (_thread != null && _thread.IsAlive)
+            {
+                return true;
+            }
+
+            _thread = new Thread(ProcessForever) { Name = "Logger Process Thread" };
+            _thread.Start();
+
+
+            return true;
+        }
+
+        public void ProcessForever()
+        {
             while (!_stopProcessing)
             {
                 if (_stopProcessing) break;
 
                 foreach (var schedule in _schedules.Where(x => x.NextRunDate <= DateTime.Now))
                 {
-                    Console.WriteLine("test");
 
-                    schedule.SetNextRunDate(_config, DateTime.Now);
+                    // Hook into processor class - for now a simple console writeline out.
+                    Console.WriteLine("test - " + DateTime.Now + " " + _config.InstantInterval + " Schedule Type:" + schedule.ScheduleType);
+
+                    ProcessSchedule(schedule);
                 }
 
                 var next = _schedules.OrderBy(x => x.NextRunDate).First();
@@ -70,9 +93,20 @@ namespace Logger
             }
         }
 
-        protected override void OnStop()
+        private void ProcessSchedule(IScheduler schedule)
+        {
+            schedule.SetNextRunDate(_config, DateTime.Now);
+        }
+        
+        private void EndProcess()
         {
             _stopProcessing = true;
+            _thread.Join();
+        }
+
+        protected override void OnStop()
+        {
+            EndProcess();
         }
     }
 }
