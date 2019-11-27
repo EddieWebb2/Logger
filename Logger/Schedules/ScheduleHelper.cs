@@ -1,6 +1,5 @@
 ﻿using System;
 using Logger.Infrastructure;
-using Logger.Types;
 
 namespace Logger.Schedules
 {
@@ -31,30 +30,9 @@ namespace Logger.Schedules
             return current;
         }
 
-        public bool IsWorkingDay(DayOfWeek self) => _config.RunAtWeekend || !(self == DayOfWeek.Saturday || self == DayOfWeek.Sunday);
-
-        public DateTime LastSearchDate(IScheduler schedule)
+        public bool IsWorkingDay(DayOfWeek self)
         {
-            var current = schedule.NextRunDate;
-            var span = TimeSpan.Zero;
-
-            switch (schedule.AlertFrequency)
-            {
-                case AlertFrequencies.Instant:
-                    span = _config.InstantInterval;
-                    break;
-                case AlertFrequencies.Daily:
-                    if (!_config.RunAtWeekend && current.DayOfWeek == DayOfWeek.Monday)
-                        span = TimeSpan.FromDays(3);
-                    else
-                        span = TimeSpan.FromDays(1);
-                    break;
-                case AlertFrequencies.Weekly:
-                    span = TimeSpan.FromDays(7);
-                    break;
-            }
-
-            return current.Subtract(span);
+            return _config.RunAtWeekend || !(self == DayOfWeek.Saturday || self == DayOfWeek.Sunday);
         }
     }
 }
