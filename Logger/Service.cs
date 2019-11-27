@@ -15,6 +15,7 @@ namespace Logger
         private readonly IScheduleHelper _scheduleHelper;
 
         private bool _stopProcessing;
+        private List<IScheduler> _schedules;
         private Thread _thread;
 
         public Service(ILoggerConfiguration config, IScheduleHelper scheduleHelper)
