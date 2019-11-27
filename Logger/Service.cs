@@ -1,19 +1,20 @@
+﻿using Logger.Infrastructure;
+using Logger.Schedules;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.Threading;
-using Logger.Infrastructure;
-using Logger.Schedules;
 
 namespace Logger
 {
     partial class Service : ServiceBase
     {
-        private readonly ILoggerConfiguration _config;
-        private List<IScheduler> _schedules;
-        private readonly IScheduleHelper _scheduleHelper;
+        private static readonly ILogger Log = Serilog.Log.ForContext<Service>();
 
+        private readonly ILoggerConfiguration _config;
+        private readonly IScheduleHelper _scheduleHelper;
         private bool _stopProcessing;
         private List<IScheduler> _schedules;
         private Thread _thread;
@@ -24,7 +25,6 @@ namespace Logger
             _scheduleHelper = scheduleHelper;
 
             InitializeComponent();
-
             ServiceConfiguration();
         }
 
@@ -40,6 +40,7 @@ namespace Logger
             foreach (var sch in _schedules)
             {
                 sch.SetNextRunDate(_config, DateTime.Now);
+                Log.ForContext<Service>().Information($"Next run {sch.NextRunDate}");
             }
         }
 
@@ -56,6 +57,7 @@ namespace Logger
         protected override void OnStart(string[] args)
         {
             BeginProcess();
+            Log.Information("Started Logger");
         }
 
 
@@ -63,12 +65,14 @@ namespace Logger
         {
             if (_thread != null && _thread.IsAlive)
             {
+                Log.Debug("Logger Process Thread already exists");
                 return true;
             }
 
             _thread = new Thread(ProcessForever) { Name = "Logger Process Thread" };
             _thread.Start();
 
+            Log.Debug("Logger Process Thread has been started");
 
             return true;
         }
@@ -97,6 +101,7 @@ namespace Logger
         private void ProcessSchedule(IScheduler schedule)
         {
             schedule.SetNextRunDate(_config, DateTime.Now);
+            Log.Debug($"Set schedule next run date: {schedule.NextRunDate}");
         }
         
         private void EndProcess()
@@ -108,6 +113,7 @@ namespace Logger
         protected override void OnStop()
         {
             EndProcess();
+            Log.ForContext<Service>().Information("Service Was Stopped");
         }
     }
 }
