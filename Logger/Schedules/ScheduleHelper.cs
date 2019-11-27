@@ -21,7 +21,7 @@ namespace Logger.Schedules
                     case DayOfWeek.Saturday:
                         current = current.AddDays(2);
                         break;
-                    case DayOfWeek.Sunday:
+                    default:
                         current = current.AddDays(1);
                         break;
                 }
