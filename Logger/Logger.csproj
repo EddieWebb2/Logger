@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.1.5.14\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.1.5.14\lib\net45\Serilog.FullNetFx.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StructureMap.4.7.1\lib\net45\StructureMap.dll</HintPath>
     </Reference>
@@ -48,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\LogHandler.cs" />
     <Compile Include="Infrastructure\ILoggerConfiguration.cs" />
     <Compile Include="Infrastructure\IScheduleHelper.cs" />
     <Compile Include="Infrastructure\IScheduler.cs" />
@@ -58,7 +65,6 @@
     <Compile Include="Schedules\DailySchedule.cs" />
     <Compile Include="Schedules\InstantSchedule.cs" />
     <Compile Include="Schedules\ScheduleHelper.cs" />
-    <Compile Include="Schedules\ScheduleValidator.cs" />
     <Compile Include="Schedules\WeeklySchedule.cs" />
     <Compile Include="Service.cs">
       <SubType>Component</SubType>
@@ -66,8 +72,6 @@
     <Compile Include="Service.Designer.cs">
       <DependentUpon>Service.cs</DependentUpon>
     </Compile>
-    <Compile Include="Types\AlertFrequencies.cs" />
-    <Compile Include="Types\ReleaseModes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
