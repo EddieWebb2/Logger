@@ -7,7 +7,10 @@ namespace Logger.Schedules
     {
         private readonly ILoggerConfiguration _config;
 
-        public ScheduleHelper(ILoggerConfiguration config) => _config = config;
+        public ScheduleHelper(ILoggerConfiguration config)
+        {
+            _config = config;
+        }
 
         public DateTime GetNextWorkingDay(DateTime current)
         {

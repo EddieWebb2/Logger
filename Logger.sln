@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{CFF12D7A-46A5-477F-8C7D-1F08284290E3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{2A7B298C-9D94-4AAC-9DBC-B9E586DC0135}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		gulpfile.js = gulpfile.js
+		nuget.config = nuget.config
+		package.json = package.json
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
