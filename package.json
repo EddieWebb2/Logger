@@ -1,6 +1,6 @@
 {
   "name": "Logger",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-bump": "^1.0.0",
