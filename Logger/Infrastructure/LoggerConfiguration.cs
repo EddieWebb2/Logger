@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Configuration;
-using Logger.Types;
 
 namespace Logger.Infrastructure
 {
     public class LoggerConfiguration: ILoggerConfiguration
     {
-        public ReleaseModes Mode { get; set; }
-
+        public string SoftwareName { get; }
         public TimeSpan InstantInterval { get; set; }
         public TimeSpan DayStart { get; set; }
         public TimeSpan DayEnd { get; set; }
@@ -19,8 +17,7 @@ namespace Logger.Infrastructure
         public LoggerConfiguration()
         {
             // I will replace this with my own custom app config handler
-            Mode = (ReleaseModes)Enum.Parse(typeof(ReleaseModes), ConfigurationManager.AppSettings["Mode"]);
-
+            SoftwareName = ConfigurationManager.AppSettings["SoftwareName"];
             InstantInterval = TimeSpan.Parse(ConfigurationManager.AppSettings["InstantInterval"]);
             DayStart = TimeSpan.Parse(ConfigurationManager.AppSettings["DayStart"]);
             DayEnd = TimeSpan.Parse(ConfigurationManager.AppSettings["DayEnd"]);

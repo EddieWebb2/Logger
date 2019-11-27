@@ -11,6 +11,7 @@ namespace Logger.Infrastructure
             {
                 a.TheCallingAssembly();
                 a.WithDefaultConventions();
+                a.LookForRegistries();
             });
 
             For<ILoggerConfiguration>().Use(config);

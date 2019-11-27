@@ -6,6 +6,5 @@ namespace Logger.Infrastructure
     {
         DateTime GetNextWorkingDay(DateTime current);
         bool IsWorkingDay(DayOfWeek self);
-        DateTime LastSearchDate(IScheduler schedule);
     }
 }
