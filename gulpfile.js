@@ -24,9 +24,9 @@ var config = {
 }
 
 var octopus = {
-  apiKey: 'API-FZB0DV0BTJMZNA3QYABKW4KQOM',
-  host: 'http://mtg-tfs-cc:8888',
-  packages: '/nuget/packages'
+    apiKey: 'API-6QLJIB1ND6UOXNC6AKCRTS2OK',
+    host: 'http://192.168.100.110:8888/',
+    packages: '/nuget/packages'
 }
 
 //gulp.task('default', ["restore", "version", "compile", "test"]);
@@ -64,7 +64,7 @@ gulp.task('compile', ["restore", "version"], function () {
             verbosity: "minimal",
             properties: {
                 RunOctoPack: true,
-                VisualStudioVersion: 16.0
+                VisualStudioVersion: 15.0
             }
         }));
 });
