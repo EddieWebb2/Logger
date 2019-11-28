@@ -9,6 +9,7 @@ namespace Logger.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            var t = DateTime.UtcNow;
         }
     }
 }
