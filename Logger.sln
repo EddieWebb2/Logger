@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{2A7B298C
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger.Tests", "Logger.Tests\Logger.Tests.csproj", "{A3C685DB-5FC0-42DB-BD7D-03BF8CF67094}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{CFF12D7A-46A5-477F-8C7D-1F08284290E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFF12D7A-46A5-477F-8C7D-1F08284290E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFF12D7A-46A5-477F-8C7D-1F08284290E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C685DB-5FC0-42DB-BD7D-03BF8CF67094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C685DB-5FC0-42DB-BD7D-03BF8CF67094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C685DB-5FC0-42DB-BD7D-03BF8CF67094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C685DB-5FC0-42DB-BD7D-03BF8CF67094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
