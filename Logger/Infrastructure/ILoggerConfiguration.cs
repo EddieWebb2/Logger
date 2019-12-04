@@ -5,6 +5,7 @@ namespace Logger.Infrastructure
     public interface ILoggerConfiguration
     {
         string SoftwareName { get; }
+        string LoggerServiceEndpoint { get; }
 
         TimeSpan InstantInterval { get; }
         TimeSpan DayStart { get; }
