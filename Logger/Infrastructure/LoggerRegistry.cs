@@ -1,4 +1,5 @@
-﻿using Logger.Schedules;
+﻿using Logger.Api.Controllers;
+using Logger.Schedules;
 using StructureMap;
 
 namespace Logger.Infrastructure
@@ -12,6 +13,8 @@ namespace Logger.Infrastructure
                 a.TheCallingAssembly();
                 a.WithDefaultConventions();
                 a.LookForRegistries();
+
+                a.AddAllTypesOf<IController>();
             });
 
             For<ILoggerConfiguration>().Use(config);

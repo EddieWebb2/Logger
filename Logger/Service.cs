@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.Threading;
+using Logger.Api;
 
 namespace Logger
 {
@@ -15,14 +16,17 @@ namespace Logger
 
         private readonly ILoggerConfiguration _config;
         private readonly IScheduleHelper _scheduleHelper;
+        private readonly ApiHost _api;
         private bool _stopProcessing;
+        private IDisposable _host;
         private List<IScheduler> _schedules;
         private Thread _thread;
 
-        public Service(ILoggerConfiguration config, IScheduleHelper scheduleHelper)
+        public Service(ILoggerConfiguration config, IScheduleHelper scheduleHelper, ApiHost api)
         {
             _config = config;
             _scheduleHelper = scheduleHelper;
+            _api = api;
 
             InitializeComponent();
             ServiceConfiguration();
@@ -56,6 +60,7 @@ namespace Logger
 
         protected override void OnStart(string[] args)
         {
+            _host = _api.Start();
             BeginProcess();
             Log.Information("Started Logger");
         }
