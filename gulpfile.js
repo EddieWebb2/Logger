@@ -16,13 +16,13 @@ var project = JSON.parse(fs.readFileSync("./package.json"));
 
 var config = {
 
-  name: project.name,
+  name: "logger",
   background: project.background,
   buildNumber: args.build || "000",
   version: project.version + "." + (args.build || "000"),
   mode: args.mode || "Debug",
   output: ".build/deploy",
-  deployTarget: args.deployTarget,
+  deployTarget: "dev",
   releasenotesfile: "ReleaseNotes.md"
 }
 
