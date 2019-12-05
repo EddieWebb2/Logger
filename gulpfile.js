@@ -90,7 +90,7 @@ gulp.task('publish', [ "test" ], function() {
     .src([ "*/bin/*.nupkg", "*/bin/*/*.nupkg" ])
     .pipe(nuget.push({
       nuget: ".build/tools/nuget.exe",
-      source: octopus.host + octopus.packages,
+      feed: octopus.host + octopus.packages,
       apiKey: octopus.apiKey
     }));
 });
