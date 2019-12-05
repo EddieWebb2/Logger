@@ -15,8 +15,7 @@ var debug = require("gulp-debug");
 var project = JSON.parse(fs.readFileSync("./package.json"));
 
 var config = {
-
-  name: "logger",
+  name: project.name,
   background: project.background,
   buildNumber: args.build || "000",
   version: project.version + "." + (args.build || "000"),
@@ -100,14 +99,6 @@ gulp.task('createRelease', [ "publish" ], shell.task([
   ' --server ' + octopus.host +
   ' --apikey ' + octopus.apiKey +
   ' --project ' + config.name +
-  ' --version ' + config.version +
-  ' --defaultpackageversion ' + config.version +
-  ' --deployto ' + config.deployTarget +
-  ' --releasenotesfile ' + config.releasenotesfile,
-  '".build/tools/octo.exe" create-release' +
-  ' --server ' + octopus.host +
-  ' --apikey ' + octopus.apiKey +
-  ' --project ' + config.background +
   ' --version ' + config.version +
   ' --defaultpackageversion ' + config.version +
   ' --deployto ' + config.deployTarget +
