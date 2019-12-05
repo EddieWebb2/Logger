@@ -1,5 +1,5 @@
 {
-  "name": "Logger",
+  "name": "logger",
   "version": "0.0.2",
   "dependencies": {
     "gulp": "^3.9.0",
