@@ -1,4 +1,6 @@
 ﻿using Logger.Api.Controllers;
+using Logger.Models;
+using Logger.Persist.InMemory;
 using Logger.Schedules;
 using StructureMap;
 
@@ -19,6 +21,8 @@ namespace Logger.Infrastructure
 
             For<ILoggerConfiguration>().Use(config);
             For<IScheduleHelper>().Use(new ScheduleHelper(config));
+
+            For<Schedule>().Use<InMemoryRepository<Schedule>>();
         }
     }
 }

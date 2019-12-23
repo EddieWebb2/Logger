@@ -1,5 +1,6 @@
 ﻿using System;
 using Logger.Infrastructure;
+using Logger.Models;
 using Serilog;
 
 namespace Logger.Schedules
@@ -9,7 +10,7 @@ namespace Logger.Schedules
         private static readonly ILogger Log = Serilog.Log.ForContext<WeeklySchedule>();
 
         private readonly IScheduleHelper _scheduleHelper;
-        public string ScheduleType { get; }
+        public AlertFrequency ScheduleType { get; }
         public DateTime NextRunDate { get; private set; }
 
         public void SetNextRunDate(ILoggerConfiguration config, DateTime current)
@@ -30,7 +31,7 @@ namespace Logger.Schedules
         public WeeklySchedule(IScheduleHelper helper)
         {
             _scheduleHelper = helper;
-            ScheduleType = "Weekly";
+            ScheduleType = AlertFrequency.Weekly;
         }
     }
 }

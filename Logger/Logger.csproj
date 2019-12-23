@@ -67,6 +67,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
@@ -91,6 +92,11 @@
     <Compile Include="Infrastructure\LoggerConfiguration.cs" />
     <Compile Include="Infrastructure\LoggerRegistry.cs" />
     <Compile Include="Infrastructure\SerilogMiddleware.cs" />
+    <Compile Include="Models\AlertFrequency.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Persist\InMemory\InMemoryRepository.cs" />
+    <Compile Include="Persist\IRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedules\DailySchedule.cs" />
@@ -108,6 +114,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Persist\Database\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

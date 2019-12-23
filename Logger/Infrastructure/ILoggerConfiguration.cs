@@ -7,6 +7,8 @@ namespace Logger.Infrastructure
         string SoftwareName { get; }
         string LoggerServiceEndpoint { get; }
 
+        string LoggerDB { get; }
+
         TimeSpan InstantInterval { get; }
         TimeSpan DayStart { get; }
         TimeSpan DayEnd { get; }

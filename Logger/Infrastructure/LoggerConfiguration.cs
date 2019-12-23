@@ -7,6 +7,7 @@ namespace Logger.Infrastructure
     {
         public string SoftwareName { get; set; }
         public string LoggerServiceEndpoint { get; set; }
+        public string LoggerDB { get; }
 
         public TimeSpan InstantInterval { get; set; }
         public TimeSpan DayStart { get; set; }
@@ -21,6 +22,7 @@ namespace Logger.Infrastructure
             // I will replace this with my own custom app config handler
             SoftwareName = ConfigurationManager.AppSettings["SoftwareName"];
             LoggerServiceEndpoint = ConfigurationManager.AppSettings["LoggerServiceEndpoint"];
+            LoggerDB = ConfigurationManager.ConnectionStrings["LoggerDB"].ConnectionString;
 
             InstantInterval = TimeSpan.Parse(ConfigurationManager.AppSettings["InstantInterval"]);
             DayStart = TimeSpan.Parse(ConfigurationManager.AppSettings["DayStart"]);
