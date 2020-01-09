@@ -111,7 +111,7 @@ gulp.task('createRelease', ["publish"], shell.task([
     ' --project ' + config.name +
     ' --version ' + config.version +
     ' --defaultpackageversion ' + config.version +
-    ' --deployto ' + config.deployTarget
+    ' --deployto ' + config.deployTarget +
   ' --releasenotesfile ' + config.releasenotesfile
 ]));
 
