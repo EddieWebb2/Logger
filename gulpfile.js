@@ -9,8 +9,14 @@ var nuget = require('gulp-nuget');
 var bump = require('gulp-bump');
 var xunit = require('gulp-xunit-runner');
 
-//optional, lets you do .pipe(debug()) to see whats going on
+//var log = require('fancy-log');
+//log('Logging:                                              ' + packageName);
+//log('Logging:                                              ' + config.name + "/bin/" + config.mode + '/' + packageName);
+//log('Logging:                                              ' + '".build/tools/nuget.exe" restore ' + config.name + '.sln -configFile nuget.config');
+//log(config.background);
+//log(octopus.host + octopus.packages);
 
+//optional, lets you do .pipe(debug()) to see whats going on
 var debug = require("gulp-debug");
 var project = JSON.parse(fs.readFileSync("./package.json"));
 
@@ -28,7 +34,7 @@ var config = {
 
 var octopus = {
 	apiKey: 'API-6QLJIB1ND6UOXNC6AKCRTS2OK',
-	host: 'http://192.168.100.110:8888/',
+	host: 'http://192.168.100.110:8888',
 	packages: '/nuget/packages'
 }
 
@@ -84,44 +90,48 @@ gulp.task('test', [ "compile" ], function() {
     }));
 });
 
-gulp.task('publish', [ "test" ], function() {
-  return gulp
-    .src([ "*/bin/*.nupkg", "*/bin/*/*.nupkg" ])
-    .pipe(nuget.push({
-      nuget: ".build/tools/nuget.exe",
-      feed: octopus.host + octopus.packages,
-      apiKey: octopus.apiKey
-    }));
+gulp.task('publish', ["test"], function () {
+
+    var packageName = config.name + "." + config.version + ".nupkg";
+
+    return gulp
+        .src(config.name + "/bin/" + config.mode + '/' + packageName)
+        .pipe(nuget.push({
+            nuget: ".build/tools/nuget.exe",
+            feed: octopus.host + octopus.packages,
+            apiKey: octopus.apiKey
+        }));
+
 });
 
-gulp.task('createRelease', [ "publish" ], shell.task([
-  '".build/tools/octo.exe" create-release' +
-  ' --server ' + octopus.host +
-  ' --apikey ' + octopus.apiKey +
-  ' --project ' + config.name +
-  ' --version ' + config.version +
-  ' --defaultpackageversion ' + config.version +
-  ' --deployto ' + config.deployTarget +
+gulp.task('createRelease', ["publish"], shell.task([
+    '".build/tools/octo.exe" create-release' +
+    ' --server ' + octopus.host +
+    ' --apikey ' + octopus.apiKey +
+    ' --project ' + config.name +
+    ' --version ' + config.version +
+    ' --defaultpackageversion ' + config.version +
+    ' --deployto ' + config.deployTarget
   ' --releasenotesfile ' + config.releasenotesfile
 ]));
- 
-gulp.task('bump:patch', function() {
-  return gulp
-    .src("./package.json")
-    .pipe(bump({ type: "patch"}))
-    .pipe(gulp.dest('./'));
-});
- 
-gulp.task('bump:minor', function() {
-  return gulp
-    .src("./package.json")
-    .pipe(bump({ type: "minor"}))
-    .pipe(gulp.dest('./'));
+
+gulp.task('bump:patch', function () {
+    return gulp
+        .src("./package.json")
+        .pipe(bump({ type: "patch" }))
+        .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump:major', function() {
-  return gulp
-    .src("./package.json")
-    .pipe(bump({ type: "major"}))
-    .pipe(gulp.dest('./'));
+gulp.task('bump:minor', function () {
+    return gulp
+        .src("./package.json")
+        .pipe(bump({ type: "minor" }))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump:major', function () {
+    return gulp
+        .src("./package.json")
+        .pipe(bump({ type: "major" }))
+        .pipe(gulp.dest('./'));
 });
